@@ -9,8 +9,8 @@
 <style>
   :root{
     /* Paleta violeta + atardecer */
-    --bg:#0b0717;               /* violeta muy oscuro */
-    --bg-2:#120a24;             /* capa extra */
+    --bg:#ded2ff;               /* violeta muy oscuro */
+    --bg-2:#b99bff;             /* capa extra */
     --fg:#f7f7fb;
     --muted:#c7c3d9;
     --violet:#7b31ff;
@@ -18,19 +18,19 @@
     --sun-1:#ff9a5a;            /* naranja suave */
     --sun-2:#ff6fa9;            /* rosado */
     --sky-1:#67d5ff;            /* celeste */
-    --card:#160d2b;             /* panel */
+    --card:#463964;             /* panel */
     --glass:#ffffff12;
     --radius:16px;
-    --shadow:0 10px 30px rgba(0,0,0,.4);
-    --ring: 0 0 0 2px #ffffff22 inset;
+    --shadow:0 10px 30px rgba(12, 59, 90, 0.4);
+    --ring: 0 0 0 2px #3a1f5a22 inset;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0; color:var(--fg); font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
     background:
-      radial-gradient(1000px 600px at 10% -10%, #1d0f39 0, transparent 50%),
-      radial-gradient(900px 500px at 100% 0%, #451775 0, transparent 50%),
+      radial-gradient(1000px 600px at 10% -10%, #4c3579 0, transparent 50%),
+      radial-gradient(900px 500px at 100% 0%, #5e358a 0, transparent 50%),
       linear-gradient(180deg, var(--bg) 0, var(--bg-2) 100%);
   }
   header{
@@ -70,7 +70,7 @@
   /* Lightbox */
   .overlay{ position:fixed; inset:0; display:none; place-items:center; z-index:50; }
   .overlay.active{ display:grid; }
-  .backdrop{ position:absolute; inset:0; background:linear-gradient(180deg,#07040c 0,#0b0717ee 40%, #0b0717ee 100%); }
+  .backdrop{ position:absolute; inset:0; background:linear-gradient(180deg,#2b203d 0,#33265aee 40%, #3e3264ee 100%); }
   .dialog{ position:relative; width:min(92vw, 960px); max-height:86vh; border-radius:20px; overflow:hidden; background:linear-gradient(180deg, #1a0f33, #120a24);
            border:1px solid #ffffff25; box-shadow: 0 30px 80px #000000aa; display:flex; flex-direction:column; }
   .viewer{ position:relative; display:grid; place-items:center; padding:8px; }
@@ -94,7 +94,7 @@
   .title2{ margin:6px 0 8px; font-size:1.1rem; font-weight:800; }
   .note{ color:var(--muted); }
   .digits{ display:flex; gap:10px; margin:12px 0 14px; justify-content:center; }
-  .digits input{ width:58px; height:68px; text-align:center; font-size:2rem; border-radius:12px; border:1px solid #ffffff33; background:#130b26; color:var(--fg); outline:none; box-shadow: inset 0 2px 0 #0000005a; }
+  .digits input{ width:58px; height:68px; text-align:center; font-size:2rem; border-radius:12px; border:1px solid #ffffff33; background:#37285c; color:var(--fg); outline:none; box-shadow: inset 0 2px 0 #0000005a; }
   .digits input:focus{ border-color:#8ab7ff }
   .actions{ display:flex; gap:10px; justify-content:center; align-items:center; }
   button{ padding:12px 14px; border:0; border-radius:12px; font-weight:800; cursor:pointer; color:white; background:linear-gradient(90deg, var(--violet), var(--sun-2)); box-shadow: var(--ring); }
@@ -214,44 +214,53 @@
   const ITEMS = [
     { type:'img',   src:'media/001.jpg', desc:'Nuestra primer Tutsy' },
     { type:'img',   src:'media/002.jpg', desc:'Deleitandome con tus primeras comidas' },
-    { type:'video', src:'media/002.mp4', desc:'Cuando te cortaste el pelo :|' },
+    { type:'img',   src:'media/003.jpg', desc:'Se nos rompió el auto' },
     { type:'img',   src:'media/004.jpg', desc:'Deleitandome con tu hermosura' },
+    { type:'video', src:'media/004.mp4', desc:'Cuando te cortaste el pelo :|' },
     { type:'img',   src:'media/005.jpg', desc:'Haciendo match bebe' },
     { type:'img',   src:'media/006.jpg', desc:'Acá en un fiestón' },
+    { type:'video', src:'media/007.mp4', desc:'Bailando nuestro track <3' },
     { type:'img',   src:'media/007.jpg', desc:'Hubiera querdio hacer lo mismo este año' },
     { type:'img',   src:'media/008.jpg', desc:'Cuando me volví a enamorar de vos' },
     { type:'img',   src:'media/009.jpg', desc:'Con la Cafuuu' },
+    { type:'img',   src:'media/010.jpg', desc:'Acompañandome a tocar' },
     { type:'video', src:'media/010.mp4', desc:'Preparando de tus ricas pipsas' },
     { type:'img',   src:'media/011.jpg', desc:'Cuando fuimos a las cabañas en el Valle' },
     { type:'img',   src:'media/012.jpg', desc:'Tirando unas poses en la cabañita' },
     { type:'img',   src:'media/013.jpg', desc:'Siendo completamente felices' },
     { type:'img',   src:'media/014.jpg', desc:'Fotito en el miradorr' },
+    { type:'video', src:'media/014.mp4', desc:'Haciendo yoguita en la plaza' },
     { type:'img',   src:'media/015.jpg', desc:'Admirando un paisaje increíble, y Los Reyunos de fondo' },
     { type:'img',   src:'media/016.jpg', desc:'Te abrazo en tu habitación' },
     { type:'img',   src:'media/017.jpg', desc:'Acá saliendo bien bellacos' },
     { type:'img',   src:'media/018.jpg', desc:'En el espejo antes de salir' },
     { type:'img',   src:'media/019.jpg', desc:'Desayunando en un hermoso lugar' },
+    { type:'video', src:'media/019.mp4', desc:'Hermoso día en un hermoso lugar' },
     { type:'img',   src:'media/020.jpg', desc:'Por comer el helado más rico de mendo' },
     { type:'img',   src:'media/021.jpg', desc:'Cuando nos agarraron in fraganti' },
     { type:'img',   src:'media/022.jpg', desc:'Después de dormir al ado del río' },
     { type:'img',   src:'media/023.jpg', desc:'Fotito con el atardecer' },
     { type:'img',   src:'media/024.jpg', desc:'😍 😍 😍' },
+    { type:'video', src:'media/024.mp4', desc:'Probando el mejor risotto de tu vida' },
     { type:'img',   src:'media/025.jpg', desc:'Viajecito a Las Leñas' },
     { type:'img',   src:'media/026.jpg', desc:'Siendo una con la montaña' },
     { type:'img',   src:'media/027.jpg', desc:'En la carpa regocijandonos de amor' },
     { type:'img',   src:'media/028.jpg', desc:'Que delicias' },
     { type:'img',   src:'media/029.jpg', desc:'Acá con el Doni' },
+    { type:'video', src:'media/029.mp4', desc:'Salida a comer sushi' },
     { type:'img',   src:'media/030.jpg', desc:'En una terraza tomando unos drinks' },
     { type:'img',   src:'media/031.jpg', desc:'De gala bien pitucos' },
     { type:'img',   src:'media/032.jpg', desc:'Antes de tocar en Alvear' },
     { type:'img',   src:'media/033.jpg', desc:'En una sala de teatro solos' },
     { type:'img',   src:'media/034.jpg', desc:'Foto al solcito en el pasillo' },
+    { type:'video', src:'media/034.mp4', desc:'Yendo a acampar al mirador de los cóndores' },
     { type:'img',   src:'media/035.jpg', desc:'Payaseando en un resto' },
     { type:'img',   src:'media/036.jpg', desc:'❤️‍🩹 ❤️‍🩹 ❤️‍🩹' },
     { type:'img',   src:'media/037.jpg', desc:'Mini session en la vereda' },
     { type:'img',   src:'media/038.jpg', desc:'Cara de "cumplí mi sueño no lo puedo creer"' },
     { type:'img',   src:'media/039.jpg', desc:'De paseo por Chile weon' },
     { type:'img',   src:'media/040.jpg', desc:'Haciendo una cumbresita' },
+    { type:'video', src:'media/040.mp4', desc:'Bailando hard techno' },
     { type:'img',   src:'media/041.jpg', desc:'En el campo tomando mates' },
     { type:'img',   src:'media/042.jpg', desc:'En el medio de un trekking Cerro Arco' },
     { type:'img',   src:'media/043.jpg', desc:'Fotito con el chorro de la javie' },
@@ -261,8 +270,6 @@
     { type:'img',   src:'media/047.jpg', desc:'El sushi más rico que he probado y vos' },
     { type:'img',   src:'media/048.jpg', desc:'Foto al sol en Los Molles' },
     { type:'img',   src:'media/049.jpg', desc:'The last one' },
-
-    // 👉 Duplicá el formato de arriba hasta tus +40 elementos.
   ];
 
   // ========= RENDER: galería =========
@@ -435,13 +442,6 @@
       setTimeout(()=>s.remove(), 5500);
     }
   }
-
-  // Easter egg: escribir "MAR" abre el final
-  let cheat='';
-  window.addEventListener('keydown', e=>{
-    cheat = (cheat + e.key.toUpperCase()).slice(-3);
-    if (cheat === 'MAR'){ $lock.style.display='none'; $final.style.display='block'; celebrate(8); }
-  });
 </script>
 </body>
 </html>
