@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Para Mar — Galería & Mensaje</title>
-<meta name="description" content="Nuestra galería de momentos. Al final, un mensaje especial para vos, Mar." />
+<meta name="description" content="Felices 22!. Te dejo unos recuerdos y al final un mensaje para vos." />
 <meta name="theme-color" content="#3b0d80" />
 <style>
   :root{
@@ -118,6 +118,13 @@
   @media (prefers-reduced-motion: reduce){
     .confetti{ display:none }
   }
+  /* ===== Quad 2x2 (4 ítems visibles) ===== */
+  .gallery.quad{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; }
+  .gallery.quad .tile{ margin:0; height: var(--tile-h, 40svh); }
+  .gallery.quad .tile .ph,
+  .gallery.quad .tile img,
+  .gallery.quad .tile video{ width:100%; height:100%; object-fit:cover; aspect-ratio:auto; }
+  @media (max-width:720px){ .gallery.quad{ gap:8px } }
 </style>
 </head>
 <body>
@@ -125,20 +132,20 @@
     <div class="hwrap">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
-        <h1><span class="grad">Nuestra galería</span> • Para Mar 💜</h1>
+        <h1><span class="grad">Felices 22!</span> • Marchu 💜</h1>
       </div>
-      <div class="hint">Ábrela y leé la descripción; al final hay una sorpresa…</div>
+      <div class="hint">Te dejo unos recuerdos y al final un mensaje para vos</div>
     </div>
   </header>
 
   <main>
     <!-- Galería -->
-    <section id="gallery" class="masonry" aria-label="Galería de fotos y videos"></section>
+    <section id="gallery" class="gallery quad" aria-label="Galería de fotos y videos"></section>
 
     <!-- Candado al fondo -->
     <section class="lock" id="lock">
-      <div class="title2">Desbloquear el mensaje final</div>
-      <p class="note">Pista: es tu cumple #22 y todo empezó con varios "primeros"…</p>
+      <div class="title2">Pone el código y mirá el video</div>
+      
       <div class="digits" role="group" aria-label="Código de 4 dígitos">
         <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Dígito 1" />
         <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Dígito 2" />
@@ -149,25 +156,26 @@
         <button id="check">Abrir video</button>
         <button class="subtle" id="reset">Limpiar</button>
       </div>
+      <p class="note">Pista: mirá tu brazo izquierdo...</p>
       <p id="msg" class="msg"></p>
     </section>
 
     <!-- Final: Video desbloqueado -->
     <section id="final" class="card" aria-hidden="true">
       <div class="head">
-        <strong>Para vos, Mar</strong> • <span class="grad">Feliz 22</span> 🎂
+        <strong>Para vos Mar</strong> • <span class="grad">Feliz vida para ti</span> 🎂
       </div>
       <div class="body">
-        <p>Gracias por todos estos momentos. Te amo. —J</p>
+        <p>Gracias por todos estos momentos. Te amo. Juani</p>
         <video id="finalVid" class="final" controls playsinline preload="metadata" poster="video/poster.jpg">
           <source src="video/mensaje.mp4" type="video/mp4" />
-          Tu navegador no soporta video HTML5.
+          Oh no...
         </video>
       </div>
     </section>
   </main>
 
-  <footer>Hecho con amor, colores del atardecer y un toque violeta ✨</footer>
+  <footer>Hecho con mucho amorcito ✨</footer>
 
   <!-- Lightbox / visor -->
   <div id="lightbox" class="overlay" role="dialog" aria-modal="true" aria-label="Visor de imagen o video">
@@ -188,20 +196,72 @@
   // ========= CONFIG =========
   const CODE = '1111'; // Código para el video final
 
+  // Ajusta la altura para que entren 2 filas exactas (2x2)
+  (function(){
+    const headerEl = document.querySelector('header');
+    function setTileH(){
+      const gap = 18; // px de margen aproximado entre filas
+      const h = Math.max(120, Math.floor((window.innerHeight - headerEl.offsetHeight - gap*2) / 2));
+      document.documentElement.style.setProperty('--tile-h', h + 'px');
+    }
+    window.addEventListener('load', setTileH, {once:true});
+    window.addEventListener('resize', setTileH);
+  })();
+
   // Lista de ítems de la galería (mezcla de imágenes y videos)
   // Reemplazá src/desc con tus archivos reales. Podés tener 40, 60, 100… los que quieras.
   // type: 'img' | 'video'
   const ITEMS = [
-    { type:'img',   src:'media/001.jpg', desc:'Nuestro primer paseo juntos.' },
-    { type:'img',   src:'media/002.jpg', desc:'El mate que cambió todo.' },
-    { type:'video', src:'media/002.mp4', poster:'media/posters/003.jpg', desc:'Ese baile espontáneo.' },
-    { type:'img',   src:'media/004.jpg', desc:'Atardecer rosado. Vos y yo.' },
-    { type:'img',   src:'media/005.jpg', desc:'Valle Grande y nuestras risas.' },
-    { type:'video', src:'media/006.mp4', poster:'media/posters/006.jpg', desc:'Mini clip del concierto.' },
-    { type:'img',   src:'media/007.jpg', desc:'La foto que mira mamá y se emociona.' },
-    { type:'img',   src:'media/008.jpg', desc:'Caritas de “recién levantados”.' },
-    { type:'img',   src:'media/009.jpg', desc:'Abrazo que vale por mil.' },
-    { type:'video', src:'media/010.mp4', poster:'media/posters/010.jpg', desc:'Un beso entre luces.' },
+    { type:'img',   src:'media/001.jpg', desc:'Nuestra primer Tutsy' },
+    { type:'img',   src:'media/002.jpg', desc:'Deleitandome con tus primeras comidas' },
+    { type:'video', src:'media/002.mp4', desc:'Cuando te cortaste el pelo :|' },
+    { type:'img',   src:'media/004.jpg', desc:'Deleitandome con tu hermosura' },
+    { type:'img',   src:'media/005.jpg', desc:'Haciendo match bebe' },
+    { type:'img',   src:'media/006.jpg', desc:'Acá en un fiestón' },
+    { type:'img',   src:'media/007.jpg', desc:'Hubiera querdio hacer lo mismo este año' },
+    { type:'img',   src:'media/008.jpg', desc:'Cuando me volví a enamorar de vos' },
+    { type:'img',   src:'media/009.jpg', desc:'Con la Cafuuu' },
+    { type:'video', src:'media/010.mp4', desc:'Preparando de tus ricas pipsas' },
+    { type:'img',   src:'media/011.jpg', desc:'Cuando fuimos a las cabañas en el Valle' },
+    { type:'img',   src:'media/012.jpg', desc:'Tirando unas poses en la cabañita' },
+    { type:'img',   src:'media/013.jpg', desc:'Siendo completamente felices' },
+    { type:'img',   src:'media/014.jpg', desc:'Fotito en el miradorr' },
+    { type:'img',   src:'media/015.jpg', desc:'Admirando un paisaje increíble, y Los Reyunos de fondo' },
+    { type:'img',   src:'media/016.jpg', desc:'Te abrazo en tu habitación' },
+    { type:'img',   src:'media/017.jpg', desc:'Acá saliendo bien bellacos' },
+    { type:'img',   src:'media/018.jpg', desc:'En el espejo antes de salir' },
+    { type:'img',   src:'media/019.jpg', desc:'Desayunando en un hermoso lugar' },
+    { type:'img',   src:'media/020.jpg', desc:'Por comer el helado más rico de mendo' },
+    { type:'img',   src:'media/021.jpg', desc:'Cuando nos agarraron in fraganti' },
+    { type:'img',   src:'media/022.jpg', desc:'Después de dormir al ado del río' },
+    { type:'img',   src:'media/023.jpg', desc:'Fotito con el atardecer' },
+    { type:'img',   src:'media/024.jpg', desc:'😍 😍 😍' },
+    { type:'img',   src:'media/025.jpg', desc:'Viajecito a Las Leñas' },
+    { type:'img',   src:'media/026.jpg', desc:'Siendo una con la montaña' },
+    { type:'img',   src:'media/027.jpg', desc:'En la carpa regocijandonos de amor' },
+    { type:'img',   src:'media/028.jpg', desc:'Que delicias' },
+    { type:'img',   src:'media/029.jpg', desc:'Acá con el Doni' },
+    { type:'img',   src:'media/030.jpg', desc:'En una terraza tomando unos drinks' },
+    { type:'img',   src:'media/031.jpg', desc:'De gala bien pitucos' },
+    { type:'img',   src:'media/032.jpg', desc:'Antes de tocar en Alvear' },
+    { type:'img',   src:'media/033.jpg', desc:'En una sala de teatro solos' },
+    { type:'img',   src:'media/034.jpg', desc:'Foto al solcito en el pasillo' },
+    { type:'img',   src:'media/035.jpg', desc:'Payaseando en un resto' },
+    { type:'img',   src:'media/036.jpg', desc:'❤️‍🩹 ❤️‍🩹 ❤️‍🩹' },
+    { type:'img',   src:'media/037.jpg', desc:'Mini session en la vereda' },
+    { type:'img',   src:'media/038.jpg', desc:'Cara de "cumplí mi sueño no lo puedo creer"' },
+    { type:'img',   src:'media/039.jpg', desc:'De paseo por Chile weon' },
+    { type:'img',   src:'media/040.jpg', desc:'Haciendo una cumbresita' },
+    { type:'img',   src:'media/041.jpg', desc:'En el campo tomando mates' },
+    { type:'img',   src:'media/042.jpg', desc:'En el medio de un trekking Cerro Arco' },
+    { type:'img',   src:'media/043.jpg', desc:'Fotito con el chorro de la javie' },
+    { type:'img',   src:'media/044.jpg', desc:'Paseando en el valle' },
+    { type:'img',   src:'media/045.jpg', desc:'Comiendo los mejores pancakes del mundo' },
+    { type:'img',   src:'media/046.jpg', desc:'Matecitos en el Salto Colorado' },
+    { type:'img',   src:'media/047.jpg', desc:'El sushi más rico que he probado y vos' },
+    { type:'img',   src:'media/048.jpg', desc:'Foto al sol en Los Molles' },
+    { type:'img',   src:'media/049.jpg', desc:'The last one' },
+
     // 👉 Duplicá el formato de arriba hasta tus +40 elementos.
   ];
 
