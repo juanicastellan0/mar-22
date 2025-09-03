@@ -3,212 +3,328 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Para Mar • Feliz 22 🎂</title>
-<meta name="theme-color" content="#0a2a6b">
+<title>Para Mar — Galería & Mensaje</title>
+<meta name="description" content="Nuestra galería de momentos. Al final, un mensaje especial para vos, Mar." />
+<meta name="theme-color" content="#3b0d80" />
 <style>
   :root{
-    --bg:#0b1220;       /* navy oscuro */
-    --panel:#111a2f;
-    --fg:#f6f7fb;
-    --muted:#b9c2da;
-    --accent:#2f6bff;   /* azul acento */
-    --success:#5cf3a6;
-    --danger:#ff6b88;
-    --card-w:clamp(300px,92vw,560px);
+    /* Paleta violeta + atardecer */
+    --bg:#0b0717;               /* violeta muy oscuro */
+    --bg-2:#120a24;             /* capa extra */
+    --fg:#f7f7fb;
+    --muted:#c7c3d9;
+    --violet:#7b31ff;
+    --violet-2:#b07cff;
+    --sun-1:#ff9a5a;            /* naranja suave */
+    --sun-2:#ff6fa9;            /* rosado */
+    --sky-1:#67d5ff;            /* celeste */
+    --card:#160d2b;             /* panel */
+    --glass:#ffffff12;
     --radius:16px;
-    --shadow:0 10px 28px rgba(0,0,0,.28);
+    --shadow:0 10px 30px rgba(0,0,0,.4);
+    --ring: 0 0 0 2px #ffffff22 inset;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; background:radial-gradient(1200px 600px at 10% -10%,#14234c 0,#0b1220 45%,#0b1220 100%);
-    color:var(--fg); font-family: system-ui,-apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, sans-serif;
-    line-height:1.5; letter-spacing:.2px;
+    margin:0; color:var(--fg); font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+    background:
+      radial-gradient(1000px 600px at 10% -10%, #1d0f39 0, transparent 50%),
+      radial-gradient(900px 500px at 100% 0%, #451775 0, transparent 50%),
+      linear-gradient(180deg, var(--bg) 0, var(--bg-2) 100%);
   }
-  header{position:sticky; top:0; z-index:10; background:linear-gradient(#0b1220ee,#0b1220cc 60%,transparent); padding:14px 12px 6px}
-  .hwrap{max-width:var(--card-w); margin:0 auto; display:flex; gap:12px; align-items:center; justify-content:space-between}
-  .title{font-weight:700; margin:0; font-size:1rem}
-  .progress{height:6px; background:#ffffff1a; border-radius:999px; overflow:hidden; flex:1; margin-left:12px}
-  .bar{height:100%; width:0%; background:linear-gradient(90deg,var(--accent),#7aa5ff)}
-  main{display:grid; place-items:start center; padding:24px 12px 80px}
-  .card{
-    width:var(--card-w); background:linear-gradient(180deg,#12204a,#0f1a36); border:1px solid #ffffff1a;
-    border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; margin:18px 0;
+  header{
+    position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.1) blur(8px);
+    background:linear-gradient(180deg, #0b0717ee 0, #0b0717c8 60%, transparent);
+    padding:14px 12px 10px; border-bottom:1px solid #ffffff18;
   }
-  .media{aspect-ratio:4/5; background:#0a1330; display:grid; place-items:center}
-  .media img{width:100%; height:100%; object-fit:cover; display:block}
-  .content{padding:14px 14px 16px}
-  .kicker{font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.12em}
-  h2{margin:.15rem 0 .35rem; font-size:1.06rem}
-  p{margin:.4rem 0 .6rem; color:#e2e8ff}
-  button, .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-    padding:12px 14px; border:0; background:var(--accent); color:white; font-weight:700; border-radius:12px; cursor:pointer;
-    transition: transform .06s ease, filter .15s ease; text-decoration:none;
+  .hwrap{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px}
+  .brand{display:flex; align-items:center; gap:12px}
+  .logo{width:36px; height:36px; border-radius:12px; background:
+    conic-gradient(from 210deg, var(--violet), var(--sun-2), var(--sun-1), var(--sky-1), var(--violet));
+    box-shadow: var(--ring);}
+  h1{margin:0; font-size:1.05rem; font-weight:800; letter-spacing:.2px;}
+  .grad{
+    background: linear-gradient(90deg, var(--violet), var(--sun-2), var(--sky-1));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  button:active{transform:scale(.98)}
-  .subtle{background:#ffffff12}
-  .note{font-size:.92rem; color:var(--muted)}
-  .reveal{display:none; margin-top:8px; padding:10px 12px; background:#0c1740; border:1px solid #ffffff1a; border-radius:10px}
-  .reveal.ok{border-color:#3cffb3}
-  /* LOCK */
-  .lock{width:var(--card-w); background:var(--panel); border:1px dashed #ffffff33; border-radius:var(--radius); padding:16px; box-shadow:var(--shadow)}
-  .digits{display:flex; gap:10px; justify-content:center; margin:10px 0 12px}
-  .digits input{
-    width:56px; height:64px; text-align:center; font-size:2rem; border-radius:12px; border:1px solid #ffffff1f;
-    background:#0d1736; color:var(--fg); outline:none; box-shadow: inset 0 2px 0 #00000044;
+  .hint{color:var(--muted); font-size:.9rem}
+
+  main{max-width:1100px; margin:18px auto 120px; padding:0 12px}
+
+  /* Masonry (columns) */
+  .masonry{ column-width: 320px; column-gap: 14px; }
+  @media (max-width:720px){ .masonry{ column-width: 220px; column-gap: 10px; } }
+  .tile{ break-inside: avoid; display:block; margin:0 0 14px; border-radius: var(--radius); overflow:hidden; background:var(--card);
+         border:1px solid #ffffff1a; box-shadow: var(--shadow); position:relative; cursor:pointer; }
+  .tile .ph{ width:100%; height:100%; display:block; background:linear-gradient(135deg,#261344,#120a24); aspect-ratio:3/4; }
+  .tile img, .tile video{ width:100%; height:auto; display:block; }
+  .badge{
+    position:absolute; top:8px; left:8px; padding:6px 10px; border-radius:999px; font-size:.75rem; font-weight:700;
+    color:white; background:linear-gradient(90deg, #00000080, #00000020);
+    border:1px solid #ffffff33; backdrop-filter: blur(4px);
   }
-  .digits input:focus{border-color:#6f9bff}
-  .hint{margin-top:8px; color:var(--muted); text-align:center}
-  .error{color:var(--danger); text-align:center; min-height:1.2em; font-weight:600}
-  .success{color:var(--success); text-align:center; font-weight:700}
-  /* FINAL */
-  #final{display:none; width:var(--card-w)}
-  video{width:100%; border-radius:16px; background:#0a1330}
-  .center{display:flex; justify-content:center; gap:10px}
-  /* CONFETTI */
-  .confetti{position:fixed; top:-8vh; width:10px; height:14px; transform:rotate(15deg); opacity:.9; z-index:9999; pointer-events:none}
+  .badge .dot{ display:inline-block; width:8px; height:8px; border-radius:999px; margin-right:6px; background:var(--violet-2); }
+  .badge.video .dot{ background:var(--sun-1); }
+
+  /* Lightbox */
+  .overlay{ position:fixed; inset:0; display:none; place-items:center; z-index:50; }
+  .overlay.active{ display:grid; }
+  .backdrop{ position:absolute; inset:0; background:linear-gradient(180deg,#07040c 0,#0b0717ee 40%, #0b0717ee 100%); }
+  .dialog{ position:relative; width:min(92vw, 960px); max-height:86vh; border-radius:20px; overflow:hidden; background:linear-gradient(180deg, #1a0f33, #120a24);
+           border:1px solid #ffffff25; box-shadow: 0 30px 80px #000000aa; display:flex; flex-direction:column; }
+  .viewer{ position:relative; display:grid; place-items:center; padding:8px; }
+  .viewer img, .viewer video{ max-width:100%; max-height:64vh; width:auto; height:auto; border-radius:12px; background:#0b0717; }
+  .desc{ padding:12px 14px 14px; color:#e9e7f5; border-top:1px solid #ffffff16; }
+  .desc .meta{ color:var(--muted); font-size:.85rem; }
+  .close, .navbtn{
+    position:absolute; top:10px; background:#00000070; color:white; border:1px solid #ffffff40; border-radius:12px; width:40px; height:40px;
+    display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(4px); font-weight:900;
+  }
+  .close{ right:10px; }
+  .navbtn{ top:calc(50% - 20px); }
+  .prev{ left:10px; }
+  .next{ right:10px; }
+
+  /* Lock section */
+  .lock{
+    margin:26px 0 0; padding:16px; border-radius:var(--radius); background:linear-gradient(180deg, #1a0f33, #120a24);
+    border:1px dashed #ffffff40; box-shadow:var(--shadow);
+  }
+  .title2{ margin:6px 0 8px; font-size:1.1rem; font-weight:800; }
+  .note{ color:var(--muted); }
+  .digits{ display:flex; gap:10px; margin:12px 0 14px; justify-content:center; }
+  .digits input{ width:58px; height:68px; text-align:center; font-size:2rem; border-radius:12px; border:1px solid #ffffff33; background:#130b26; color:var(--fg); outline:none; box-shadow: inset 0 2px 0 #0000005a; }
+  .digits input:focus{ border-color:#8ab7ff }
+  .actions{ display:flex; gap:10px; justify-content:center; align-items:center; }
+  button{ padding:12px 14px; border:0; border-radius:12px; font-weight:800; cursor:pointer; color:white; background:linear-gradient(90deg, var(--violet), var(--sun-2)); box-shadow: var(--ring); }
+  .subtle{ background: #ffffff18; }
+  .msg{ min-height:1.2em; text-align:center; font-weight:700; }
+  .ok{ color:#3cffb3 } .err{ color:#ff6b88 }
+
+  /* Final video */
+  #final{ display:none; margin-top:16px; }
+  .card{ background:linear-gradient(180deg,#1a0f33,#120a24); border:1px solid #ffffff1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
+  .card .head{ padding:12px 14px; border-bottom:1px solid #ffffff16; }
+  .card .body{ padding:12px 14px 16px; }
+  video.final{ width:100%; border-radius:12px; background:#0b0717 }
+
+  /* Confetti */
+  .confetti{ position:fixed; top:-8vh; width:10px; height:14px; transform:rotate(15deg); opacity:.95; z-index:9999; pointer-events:none }
   @keyframes fall { to { transform: translateY(110vh) rotate(360deg);} }
-  /* Footer */
-  footer{position:fixed; bottom:10px; inset-inline:0; display:grid; place-items:center; opacity:.55; font-size:.82rem}
+
+  footer{ position:fixed; inset-inline:0; bottom:10px; text-align:center; color:#bdb5d8; font-size:.85rem; opacity:.65 }
+
+  @media (prefers-reduced-motion: reduce){
+    .confetti{ display:none }
+  }
 </style>
 </head>
 <body>
   <header>
     <div class="hwrap">
-      <p class="title">Nuestra mini aventura • <strong>Feliz 22</strong> 🎂</p>
-      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1><span class="grad">Nuestra galería</span> • Para Mar 💜</h1>
+      </div>
+      <div class="hint">Ábrela y leé la descripción; al final hay una sorpresa…</div>
     </div>
   </header>
 
   <main>
-    <!-- HITO 1 -->
-    <article class="card" data-step="1">
-      <div class="media">
-        <img src="img/1.jpg" alt="Primer momento juntos">
-      </div>
-      <div class="content">
-        <div class="kicker">Hito 1</div>
-        <h2>El primer mate compartido</h2>
-        <p>Ese día dijiste “no sé si me gusta el amargo…” y ahora sos sommelier de yerba 😄</p>
-        <button class="subtle" data-reveal="#r1">Ver pista</button>
-        <div id="r1" class="reveal ok">Pista: **PRIMER** mate → <strong>1</strong></div>
-      </div>
-    </article>
+    <!-- Galería -->
+    <section id="gallery" class="masonry" aria-label="Galería de fotos y videos"></section>
 
-    <!-- HITO 2 -->
-    <article class="card" data-step="2">
-      <div class="media">
-        <img src="img/2.jpg" alt="Primer viaje juntos">
-      </div>
-      <div class="content">
-        <div class="kicker">Hito 2</div>
-        <h2>El primer viaje</h2>
-        <p>Valle Grande nos adoptó. Spoiler: siempre nos pierde el mismo camino.</p>
-        <button class="subtle" data-reveal="#r2">Ver pista</button>
-        <div id="r2" class="reveal ok">Pista: **PRIMER** viaje → <strong>1</strong></div>
-      </div>
-    </article>
-
-    <!-- HITO 3 -->
-    <article class="card" data-step="3">
-      <div class="media">
-        <img src="img/3.jpg" alt="Primer concierto juntos">
-      </div>
-      <div class="content">
-        <div class="kicker">Hito 3</div>
-        <h2>El primer concierto</h2>
-        <p>Bailamos hasta que el bajo se nos quedó pegado en el cuerpo.</p>
-        <button class="subtle" data-reveal="#r3">Ver pista</button>
-        <div id="r3" class="reveal ok">Pista: **PRIMER** concierto → <strong>1</strong></div>
-      </div>
-    </article>
-
-    <!-- HITO 4 -->
-    <article class="card" data-step="4">
-      <div class="media">
-        <img src="img/4.jpg" alt="Primer beso">
-      </div>
-      <div class="content">
-        <div class="kicker">Hito 4</div>
-        <h2>El primer beso</h2>
-        <p>Oficialmente: ahí empezó todo ❤️</p>
-        <button class="subtle" data-reveal="#r4">Ver pista</button>
-        <div id="r4" class="reveal ok">Pista: **PRIMER** beso → <strong>1</strong></div>
-      </div>
-    </article>
-
-    <!-- CANDADO -->
+    <!-- Candado al fondo -->
     <section class="lock" id="lock">
-      <h2 style="margin:0 0 6px">Desbloquear mensaje</h2>
-      <p class="note">Sumá las pistas: cuatro “primeros”… ¿el código? 😉</p>
+      <div class="title2">Desbloquear el mensaje final</div>
+      <p class="note">Pista: es tu cumple #22 y todo empezó con varios "primeros"…</p>
       <div class="digits" role="group" aria-label="Código de 4 dígitos">
         <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Dígito 1" />
         <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Dígito 2" />
         <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Dígito 3" />
         <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Dígito 4" />
       </div>
-      <div class="center">
-        <button id="check" class="btn">Abrir video</button>
-        <button id="reset" class="subtle">Limpiar</button>
+      <div class="actions">
+        <button id="check">Abrir video</button>
+        <button class="subtle" id="reset">Limpiar</button>
       </div>
-      <p id="msg" class="error" aria-live="polite"></p>
-      <p class="hint">Pista extra: <em>cuatro veces el mismo número</em>.</p>
+      <p id="msg" class="msg"></p>
     </section>
 
-    <!-- FINAL -->
-    <section id="final">
-      <article class="card" style="margin-top:10px">
-        <div class="content">
-          <div class="kicker">Feliz cumpleaños #22 🎂</div>
-          <h2>Para vos, Mar</h2>
-          <p>Gracias por todo lo que compartimos. Te quiero. —J</p>
-        </div>
-        <div class="content" style="padding-top:0">
-          <video id="vid" controls playsinline preload="metadata" poster="img/poster.jpg">
-            <source src="video/mensaje.mp4" type="video/mp4">
-            Tu navegador no soporta video HTML5.
-          </video>
-          <div class="center" style="margin-top:10px">
-            <a class="subtle btn" href="#" onclick="location.reload();return false;">Volver al inicio</a>
-          </div>
-        </div>
-      </article>
+    <!-- Final: Video desbloqueado -->
+    <section id="final" class="card" aria-hidden="true">
+      <div class="head">
+        <strong>Para vos, Mar</strong> • <span class="grad">Feliz 22</span> 🎂
+      </div>
+      <div class="body">
+        <p>Gracias por todos estos momentos. Te amo. —J</p>
+        <video id="finalVid" class="final" controls playsinline preload="metadata" poster="video/poster.jpg">
+          <source src="video/mensaje.mp4" type="video/mp4" />
+          Tu navegador no soporta video HTML5.
+        </video>
+      </div>
     </section>
   </main>
 
-  <footer>Hecho con amor 💛</footer>
+  <footer>Hecho con amor, colores del atardecer y un toque violeta ✨</footer>
+
+  <!-- Lightbox / visor -->
+  <div id="lightbox" class="overlay" role="dialog" aria-modal="true" aria-label="Visor de imagen o video">
+    <div class="backdrop"></div>
+    <div class="dialog">
+      <button class="close" id="btnClose" aria-label="Cerrar">✕</button>
+      <button class="navbtn prev" id="btnPrev" aria-label="Anterior">❮</button>
+      <button class="navbtn next" id="btnNext" aria-label="Siguiente">❯</button>
+      <div class="viewer" id="viewer"></div>
+      <div class="desc" id="lbDesc">
+        <div class="meta" id="lbMeta"></div>
+        <div id="lbText"></div>
+      </div>
+    </div>
+  </div>
 
 <script>
-  // ===== Config =====
-  const CODE = "1111"; // ← tu código
+  // ========= CONFIG =========
+  const CODE = '1111'; // Código para el video final
 
-  // ===== Utilidad: progreso al scrollear =====
-  const bar = document.getElementById('bar');
-  function updateProgress(){
-    const cards = [...document.querySelectorAll('.card[data-step]')];
-    const seen = cards.filter(c => c.getBoundingClientRect().top < innerHeight*0.6).length;
-    const total = cards.length;
-    bar.style.width = Math.min((seen/total)*100, 100) + '%';
-  }
-  addEventListener('scroll', updateProgress, {passive:true});
-  addEventListener('load', updateProgress);
+  // Lista de ítems de la galería (mezcla de imágenes y videos)
+  // Reemplazá src/desc con tus archivos reales. Podés tener 40, 60, 100… los que quieras.
+  // type: 'img' | 'video'
+  const ITEMS = [
+    { type:'img',   src:'media/001.jpg', desc:'Nuestro primer paseo juntos.' },
+    { type:'img',   src:'media/002.jpg', desc:'El mate que cambió todo.' },
+    { type:'video', src:'media/002.mp4', poster:'media/posters/003.jpg', desc:'Ese baile espontáneo.' },
+    { type:'img',   src:'media/004.jpg', desc:'Atardecer rosado. Vos y yo.' },
+    { type:'img',   src:'media/005.jpg', desc:'Valle Grande y nuestras risas.' },
+    { type:'video', src:'media/006.mp4', poster:'media/posters/006.jpg', desc:'Mini clip del concierto.' },
+    { type:'img',   src:'media/007.jpg', desc:'La foto que mira mamá y se emociona.' },
+    { type:'img',   src:'media/008.jpg', desc:'Caritas de “recién levantados”.' },
+    { type:'img',   src:'media/009.jpg', desc:'Abrazo que vale por mil.' },
+    { type:'video', src:'media/010.mp4', poster:'media/posters/010.jpg', desc:'Un beso entre luces.' },
+    // 👉 Duplicá el formato de arriba hasta tus +40 elementos.
+  ];
 
-  // ===== Mostrar pistas =====
-  document.querySelectorAll('[data-reveal]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const tgt = document.querySelector(btn.dataset.reveal);
-      if (tgt) tgt.style.display = 'block';
-    });
+  // ========= RENDER: galería =========
+  const $gallery = document.getElementById('gallery');
+  const frag = document.createDocumentFragment();
+
+  ITEMS.forEach((item, idx) => {
+    const fig = document.createElement('figure');
+    fig.className = 'tile';
+    fig.tabIndex = 0;
+    fig.setAttribute('role','button');
+    fig.setAttribute('aria-label', item.type === 'video' ? 'Abrir video' : 'Abrir foto');
+
+    const badge = document.createElement('div');
+    badge.className = 'badge ' + (item.type === 'video' ? 'video' : 'image');
+    badge.innerHTML = `<span class="dot"></span>${item.type === 'video' ? 'Video' : 'Foto'}`;
+    fig.appendChild(badge);
+
+    if (item.type === 'img'){
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.alt = item.desc || 'Foto';
+      img.dataset.src = item.src; // lazy via IO
+      img.className = 'ph';
+      fig.appendChild(img);
+    } else {
+      const v = document.createElement('video');
+      v.muted = true; v.playsInline = true; v.preload = 'metadata';
+      if (item.poster) v.poster = item.poster;
+      v.dataset.src = item.src; // lazy set later
+      v.className = 'ph';
+      fig.appendChild(v);
+    }
+
+    fig.addEventListener('click', ()=> openLightbox(idx));
+    fig.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLightbox(idx);} });
+
+    frag.appendChild(fig);
   });
 
-  // ===== Inputs del candado =====
+  $gallery.appendChild(frag);
+
+  // ========= Lazy loading con IntersectionObserver =========
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){
+        const el = e.target;
+        const src = el.dataset.src;
+        if (src){
+          if (el.tagName === 'IMG') el.src = src;
+          else if (el.tagName === 'VIDEO') el.src = src + '#t=0.1'; // apuntar a 0.1s para forzar thumbnail en algunos navegadores
+          el.classList.remove('ph');
+          io.unobserve(el);
+        }
+      }
+    });
+  }, { rootMargin:'200px 0px' });
+
+  document.querySelectorAll('.tile img, .tile video').forEach(el=> io.observe(el));
+
+  // ========= Lightbox =========
+  const $overlay = document.getElementById('lightbox');
+  const $viewer  = document.getElementById('viewer');
+  const $lbText  = document.getElementById('lbText');
+  const $lbMeta  = document.getElementById('lbMeta');
+  const $btnClose= document.getElementById('btnClose');
+  const $btnPrev = document.getElementById('btnPrev');
+  const $btnNext = document.getElementById('btnNext');
+  let current = 0;
+
+  function openLightbox(idx){
+    current = idx;
+    renderLightbox();
+    $overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    $overlay.classList.remove('active');
+    $viewer.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+  function nav(delta){
+    current = (current + delta + ITEMS.length) % ITEMS.length;
+    renderLightbox();
+  }
+  function renderLightbox(){
+    const it = ITEMS[current];
+    $viewer.innerHTML = '';
+    let node;
+    if (it.type === 'img'){
+      node = document.createElement('img');
+      node.src = it.src;
+      node.alt = it.desc || 'Foto';
+    } else {
+      node = document.createElement('video');
+      node.controls = true; node.playsInline = true; node.autoplay = true;
+      node.src = it.src;
+      if (it.poster) node.poster = it.poster;
+    }
+    $viewer.appendChild(node);
+    $lbText.textContent = it.desc || '';
+    $lbMeta.textContent = `${current+1} / ${ITEMS.length} · ${it.type === 'video' ? 'Video' : 'Foto'}`;
+  }
+
+  $btnClose.addEventListener('click', closeLightbox);
+  $btnPrev.addEventListener('click', ()=>nav(-1));
+  $btnNext.addEventListener('click', ()=>nav(1));
+  $overlay.addEventListener('click', (e)=>{ if(e.target.classList.contains('backdrop')) closeLightbox(); });
+  window.addEventListener('keydown', (e)=>{
+    if (!$overlay.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') nav(-1);
+    if (e.key === 'ArrowRight') nav(1);
+  });
+
+  // ========= Candado =========
   const inputs = Array.from(document.querySelectorAll('.digits input'));
-  const msg = document.getElementById('msg');
-  const lock = document.getElementById('lock');
-  const final = document.getElementById('final');
-  const btnCheck = document.getElementById('check');
-  const btnReset = document.getElementById('reset');
+  const $msg   = document.getElementById('msg');
+  const $check = document.getElementById('check');
+  const $reset = document.getElementById('reset');
+  const $final = document.getElementById('final');
+  const $lock  = document.getElementById('lock');
 
   inputs.forEach((inp, idx)=>{
     inp.addEventListener('input', e=>{
@@ -216,46 +332,41 @@
       if (e.target.value && idx < inputs.length-1) inputs[idx+1].focus();
     });
     inp.addEventListener('keydown', e=>{
-      if (e.key === 'Backspace' && !inp.value && idx>0){ inputs[idx-1].focus(); }
+      if (e.key === 'Backspace' && !inp.value && idx>0) inputs[idx-1].focus();
     });
   });
 
-  function codeValue(){ return inputs.map(i=>i.value||'').join(''); }
+  const codeValue = () => inputs.map(i=>i.value||'').join('');
+  const showMsg = (txt, cls) => { $msg.textContent = txt; $msg.className = 'msg ' + (cls||''); };
 
-  btnCheck.addEventListener('click', tryUnlock);
-  inputs[inputs.length-1].addEventListener('input', ()=>{
-    if (codeValue().length===4) tryUnlock();
-  });
-
-  btnReset.addEventListener('click', ()=>{
-    inputs.forEach(i=>i.value=''); inputs[0].focus(); msg.textContent='';
-  });
+  $check.addEventListener('click', tryUnlock);
+  inputs[inputs.length-1].addEventListener('input', ()=>{ if (codeValue().length===4) tryUnlock(); });
+  $reset.addEventListener('click', ()=>{ inputs.forEach(i=>i.value=''); inputs[0].focus(); showMsg('', ''); });
 
   function tryUnlock(){
-    const attempt = codeValue();
-    if (attempt.length < 4){ msg.textContent = 'Ingresá los 4 dígitos.'; return; }
-    if (attempt === CODE){
-      msg.className = 'success'; msg.textContent = '¡Correcto! Abriendo…';
-      celebrate(22); // confetti por el #22
-      lock.style.display = 'none';
-      final.style.display = 'block';
-      setTimeout(()=>document.getElementById('vid')?.scrollIntoView({behavior:'smooth', block:'start'}), 350);
+    const v = codeValue();
+    if (v.length<4) return showMsg('Ingresá los 4 dígitos', 'err');
+    if (v === CODE){
+      showMsg('¡Correcto! Abriendo…','ok');
+      celebrate(22);
+      $lock.style.display = 'none';
+      $final.style.display = 'block';
+      setTimeout(()=> document.getElementById('finalVid')?.scrollIntoView({behavior:'smooth'}), 300);
     } else {
-      msg.className = 'error';
-      msg.textContent = 'Mmm… no. Pista: cuatro “primeros”…';
-      shake(lock);
+      showMsg('Mmm… no. Pista: cuatro iguales 😉', 'err');
+      shake($lock);
     }
   }
 
-  // ===== Mini animaciones =====
   function shake(el){
-    el.animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}], {duration:260, iterations:1});
+    el.animate([
+      {transform:'translateX(0)'}, {transform:'translateX(-6px)'}, {transform:'translateX(6px)'}, {transform:'translateX(0)'}
+    ], {duration:260, iterations:1});
   }
 
   function celebrate(n=22){
     for (let i=0;i<n;i++){
-      const s = document.createElement('div');
-      s.className = 'confetti';
+      const s = document.createElement('div'); s.className='confetti';
       s.style.left = Math.random()*100 + 'vw';
       s.style.background = `hsl(${Math.floor(Math.random()*360)} 90% 60%)`;
       s.style.animation = `fall ${3+Math.random()*2}s linear forwards`;
@@ -265,11 +376,11 @@
     }
   }
 
-  // ===== Easter-egg: escribir "MAR" salta al final =====
-  let cheat = '';
+  // Easter egg: escribir "MAR" abre el final
+  let cheat='';
   window.addEventListener('keydown', e=>{
     cheat = (cheat + e.key.toUpperCase()).slice(-3);
-    if (cheat === 'MAR'){ lock.style.display='none'; final.style.display='block'; celebrate(8); }
+    if (cheat === 'MAR'){ $lock.style.display='none'; $final.style.display='block'; celebrate(8); }
   });
 </script>
 </body>
