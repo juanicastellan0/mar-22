@@ -78,13 +78,24 @@
   .desc{ padding:12px 14px 14px; color:#e9e7f5; border-top:1px solid #ffffff16; }
   .desc .meta{ color:var(--muted); font-size:.85rem; }
   .close, .navbtn{
-    position:absolute; top:10px; background:#00000070; color:white; border:1px solid #ffffff40; border-radius:12px; width:40px; height:40px;
-    display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(4px); font-weight:900;
+    position:absolute;
+    background: linear-gradient(135deg, #46467ccc, #4c4c7ec0);
+    color:white;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:14px;
+    width:56px; height:56px;
+    display:grid; place-items:center;
+    cursor:pointer; backdrop-filter: blur(4px);
+    font-weight:900; font-size:15px; line-height:1;
+    box-shadow: 0 10px 28px rgba(181, 102, 255, 0.295);
+    z-index:5;  /* más arriba que el video/imagen */
+    opacity:.96;
   }
-  .close{ right:10px; }
-  .navbtn{ top:calc(50% - 20px); }
-  .prev{ left:10px; }
-  .next{ right:10px; }
+  .close{ top:5px; right:5px; }
+  .navbtn{ top:50%; transform: translateY(-50%); }
+  .prev{ left:5px; }
+  .next{ right:5px; }
+  .close:hover, .navbtn:hover{ filter: brightness(1.1); }
 
   /* Lock section */
   .lock{
@@ -125,6 +136,21 @@
   .gallery.quad .tile img,
   .gallery.quad .tile video{ width:100%; height:100%; object-fit:cover; aspect-ratio:auto; }
   @media (max-width:720px){ .gallery.quad{ gap:8px } }
+
+  /* Ocultar badge de tipo */
+  .badge{ display:none !important; }
+
+  /* Descripción fija abajo de cada tile (sin romper el 2×2) */
+  .tile{ position:relative; }
+  .cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:8px 10px;
+    background: linear-gradient(180deg, #0000, #0008 40%, #000B);
+    color:#fff; font-size:.9rem;
+    border-top:1px solid #ffffff26;
+    backdrop-filter: blur(2px);
+  }
+  .cap .meta{ font-size:.78rem; opacity:.85; margin-bottom:2px; }
 </style>
 </head>
 <body>
@@ -212,7 +238,7 @@
   // Reemplazá src/desc con tus archivos reales. Podés tener 40, 60, 100… los que quieras.
   // type: 'img' | 'video'
   const ITEMS = [
-    { type:'img',   src:'media/001.jpg', desc:'Nuestra primer Tutsy' },
+    { type:'img',   src:'media/001.jpg', desc:'Nuestra primera Tutsy' },
     { type:'img',   src:'media/002.jpg', desc:'Deleitandome con tus primeras comidas' },
     { type:'img',   src:'media/003.jpg', desc:'Se nos rompió el auto' },
     { type:'img',   src:'media/004.jpg', desc:'Deleitandome con tu hermosura' },
@@ -283,11 +309,6 @@
     fig.setAttribute('role','button');
     fig.setAttribute('aria-label', item.type === 'video' ? 'Abrir video' : 'Abrir foto');
 
-    const badge = document.createElement('div');
-    badge.className = 'badge ' + (item.type === 'video' ? 'video' : 'image');
-    badge.innerHTML = `<span class="dot"></span>${item.type === 'video' ? 'Video' : 'Foto'}`;
-    fig.appendChild(badge);
-
     if (item.type === 'img'){
       const img = document.createElement('img');
       img.loading = 'lazy';
@@ -303,6 +324,12 @@
       v.className = 'ph';
       fig.appendChild(v);
     }
+
+    const cap = document.createElement('figcaption');
+    cap.className = 'cap';
+    cap.innerHTML = `<div class="meta">${idx+1} / ${ITEMS.length}</div>
+                    <div class="text">${item.desc || ''}</div>`;
+    fig.appendChild(cap);
 
     fig.addEventListener('click', ()=> openLightbox(idx));
     fig.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLightbox(idx);} });
@@ -431,7 +458,7 @@
     ], {duration:260, iterations:1});
   }
 
-  function celebrate(n=22){
+  function celebrate(n=100){
     for (let i=0;i<n;i++){
       const s = document.createElement('div'); s.className='confetti';
       s.style.left = Math.random()*100 + 'vw';
